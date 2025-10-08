@@ -11,6 +11,7 @@ onMounted(() => {
         <nav>
             <ul class="nav">
                 <li class="nav-item"><RouterLink to="/about" class="nav-link">About</RouterLink></li>
+                <li class="nav-item"><RouterLink to="/products" class="nav-link">Products</RouterLink></li>
             </ul>
         </nav>
         <ul class="nav">
@@ -22,6 +23,7 @@ onMounted(() => {
         <nav>
             <ul class="nav">
                 <li class="nav-item"><RouterLink to="/about" class="nav-link">About</RouterLink></li>
+                <li class="nav-item"><RouterLink to="/products" class="nav-link">Products</RouterLink></li>
             </ul>
         </nav>
         <ul class="nav">

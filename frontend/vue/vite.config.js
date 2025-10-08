@@ -15,4 +15,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  // Konfiguracja serwera Laravel
+  server: {
+    proxy:{
+      '/api':{
+        target: 'http://localhost:8000',
+        changeOrigin:true,
+      }
+    }
+  }
 })
