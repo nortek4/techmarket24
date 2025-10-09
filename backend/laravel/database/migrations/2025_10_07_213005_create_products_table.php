@@ -19,7 +19,7 @@ return new class extends Migration
                 ->nullOnDelete();
             $table->string('name', 100);
             $table->decimal('price', 10, 2);
-            $table->string('image_url', 255)->nullable()->default('brak zdjecia');
+            $table->string('image_url', 255)->default('brak zdjecia');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->index('category_id');
