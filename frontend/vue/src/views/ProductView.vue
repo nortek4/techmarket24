@@ -17,6 +17,23 @@ onMounted(async () => {
 </script>
 <template>
   <ul>
-    <li v-for="product in products" :key="product.id">{{ product.name }} {{ product.price }}</li>
+    <li v-for="product in products" :key="product.id" class="d-flex flex-column align-items-center">
+      <img :src="product.image_url" alt="" />
+      <div class="product_desc d-flex flex-column align-items-center">
+        <span>Nazwa: {{ product.name }}</span>
+        <span>Opis: {{ product.description }}</span>
+        <span>Cena: {{ product.price }}</span>
+      </div>
+    </li>
   </ul>
 </template>
+
+<style scoped>
+  ul{
+    list-style: none;
+    padding: 0;
+  }
+  .product_desc{
+    gap: 15px;
+  }
+</style>
