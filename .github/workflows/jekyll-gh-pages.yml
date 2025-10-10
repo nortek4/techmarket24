@@ -1,0 +1,50 @@
+name: Deploy Vue.js to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Adjust if you're using a different version
+
+      - name: Install dependencies
+        run: |
+          cd frontend/vue
+          npm install  # Or `yarn install` if you're using Yarn
+
+      - name: Build the Vue.js app
+        run: |
+          cd frontend/vue
+          npm run build  # Or `yarn build`
+
+      - name: Upload Vue.js artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/vue/dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
