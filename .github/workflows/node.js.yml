@@ -1,0 +1,41 @@
+name: Vue.js CI
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]  # Node versions to test against
+
+    steps:
+      # Checkout the code
+      - uses: actions/checkout@v4
+
+      # Set up Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Build the Vue.js app
+      - name: Build Vue.js app
+        run: npm run build
+
+      # Run tests
+      - name: Run tests (Unit/Integration)
+        run: npm test  # If you're using a different script for tests, replace `npm test` with that.
