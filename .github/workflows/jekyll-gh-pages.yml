@@ -2,7 +2,8 @@ name: Deploy Vue.js to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -18,28 +19,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Kroki:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Zainstaluj Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Adjust if you're using a different version
+          node-version: '16'  # Możesz zmienić wersję, jeśli używasz innej
 
+      # Zainstaluj zależności Vue.js
       - name: Install dependencies
         run: |
           cd frontend/vue
-          npm install  # Or `yarn install` if you're using Yarn
+          npm install  # Zainstaluj zależności Vue.js
 
-      - name: Build the Vue.js app
+      # Zbuduj aplikację Vue.js
+      - name: Build Vue.js app
         run: |
           cd frontend/vue
-          npm run build  # Or `yarn build`
+          npm run build  # Lub `yarn build` jeśli używasz Yarn
 
-      - name: Upload Vue.js artifact
+      # Przesyłanie artefaktu (build) na GitHub Pages
+      - name: Upload Vue.js build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/vue/dist
+          path: frontend/vue/dist  # Folder z plikami builda
 
   deploy:
     runs-on: ubuntu-latest
