@@ -36,10 +36,10 @@ jobs:
           npm install  # Zainstaluj zależności Vue.js
 
       # Zbuduj aplikację Vue.js
-      - name: Build Vue.js app
+      - name: Start Vue.js app
         run: |
           cd frontend/vue
-          npm run build  # Lub `yarn build` jeśli używasz Yarn
+          npm run dev  # Lub `yarn build` jeśli używasz Yarn
 
       # Przesyłanie artefaktu (build) na GitHub Pages
       - name: Upload Vue.js build artifact
